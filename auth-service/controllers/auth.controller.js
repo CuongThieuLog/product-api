@@ -7,14 +7,12 @@ function AuthController() {
       const user = await User.findByCredentials(email, password);
 
       if (!user) {
-        return res
-          .status(401)
-          .send({ error: "Đăng nhập thất bại! Kiểm tra thông tin xác thực" });
+        return res.status(401).send({ error: "Login fail!" });
       }
 
       res.send({ id: user._id, user: user.toAuthJSON() });
     } catch (error) {
-      res.status(400).send({ error: "Đăng nhập thất bại!" });
+      res.status(400).send({ error: "Login fail!" });
     }
   };
 
@@ -25,7 +23,7 @@ function AuthController() {
       });
 
       await req.user.save();
-      res.send({ message: "Đăng xuất thành công!" });
+      res.send({ message: "Logout successfully" });
     } catch (error) {
       res.status(500).send(error);
     }

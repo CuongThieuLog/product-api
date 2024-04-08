@@ -6,7 +6,7 @@ function CategoryController() {
       const { name } = req.body;
       const category = new Category({ name });
       await category.save();
-      res.status(201).json({ message: "Tạo thành công", data: category });
+      res.status(201).json({ message: "Created successfully", data: category });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -30,7 +30,7 @@ function CategoryController() {
     try {
       const category = await Category.findById(req.params.id);
       if (!category) {
-        return res.status(404).json({ message: "Không tồn tại!" });
+        return res.status(404).json({ message: "Not found!" });
       }
       res.status(200).json({ data: category });
     } catch (error) {
@@ -47,11 +47,11 @@ function CategoryController() {
         { new: true }
       );
       if (!updatedCategory) {
-        return res.status(404).json({ message: "Không tồn tại!" });
+        return res.status(404).json({ message: "Not found!" });
       }
       res
         .status(200)
-        .json({ message: "Cập nhật thành công", data: updatedCategory });
+        .json({ message: "Updated successfully", data: updatedCategory });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -61,11 +61,11 @@ function CategoryController() {
     try {
       const deletedCategory = await Category.findByIdAndDelete(req.params.id);
       if (!deletedCategory) {
-        return res.status(404).json({ message: "Không tồn tại!" });
+        return res.status(404).json({ message: "Not found!" });
       }
       res
         .status(200)
-        .json({ message: "Xóa thành công", data: deletedCategory });
+        .json({ message: "Deleted successfully", data: deletedCategory });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
