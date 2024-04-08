@@ -5,12 +5,13 @@
   "main": "gateway/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start-gateway\" \"npm run start-auth-service\" \"npm run start-user-service\" \"npm run start-category-service\" \"npm run start-product-service\"",
+    "start": "concurrently \"npm run start-gateway\" \"npm run start-auth-service\" \"npm run start-user-service\" \"npm run start-category-service\" \"npm run start-product-service\" \"npm run start-order-service\"",
     "start-gateway": "nodemon gateway/app.js",
     "start-auth-service": "nodemon auth-service/app.js",
     "start-user-service": "nodemon user-service/app.js",
     "start-category-service": "nodemon category-service/app.js",
-    "start-product-service": "nodemon product-service/app.js"
+    "start-product-service": "nodemon product-service/app.js",
+    "start-order-service": "nodemon order-service/app.js"
   },
   "keywords": [],
   "author": "",

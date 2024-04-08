@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 var cors = require("cors");
-const port = 8004;
+const port = 8005;
 const app = express();
 const route = require("./routes/index");
 const bodyParser = require("body-parser");
@@ -20,5 +20,5 @@ app.use((err, req, res, next) => {
 connect();
 
 app.listen(port, () => {
-  console.log("Server of product listening on " + port);
+  console.log("Server of order listening on " + port);
 });

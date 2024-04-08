@@ -1,8 +1,7 @@
-// const Order = require("../../order-service/models/order.model");
+const Order = require("../../order-service/models/order.model");
 const Product = require("../models/product.model");
 
 function ProductController() {
-  // Admin
   this.create = async (req, res) => {
     try {
       const { name, description, price, quantity, cost, categoryId, image } =
@@ -23,7 +22,6 @@ function ProductController() {
     }
   };
 
-  // Admin/User
   this.getAll = async (req, res) => {
     try {
       let name = req.query.name;
@@ -41,7 +39,6 @@ function ProductController() {
     }
   };
 
-  // Admin/User
   this.getById = async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);
@@ -54,7 +51,6 @@ function ProductController() {
     }
   };
 
-  // Admin
   this.update = async (req, res) => {
     try {
       const { name, description, price, quantity, cost, categoryId, image } =
@@ -76,7 +72,6 @@ function ProductController() {
     }
   };
 
-  // Admin
   this.delete = async (req, res) => {
     try {
       const deletedProduct = await Product.findByIdAndDelete(req.params.id);
@@ -92,27 +87,25 @@ function ProductController() {
     }
   };
 
-  // Admin/User
-  // this.getRemainingQuantity = async (req, res) => {
-  //   try {
-  //     const productId = req.params.id;
-  //     const orders = await Order.find({ product: productId });
-  //     const totalOrderedQuantity = orders.reduce(
-  //       (total, order) => total + order.quantity,
-  //       0
-  //     );
-  //     const product = await Product.findById(productId);
-  //     if (!product) {
-  //       return res.status(404).json({ message: "Not Found!" });
-  //     }
-  //     const remainingQuantity = product.quantity - totalOrderedQuantity;
-  //     res.status(200).json({ remainingQuantity });
-  //   } catch (error) {
-  //     res.status(400).json({ error: error.message });
-  //   }
-  // };
+  this.getRemainingQuantity = async (req, res) => {
+    try {
+      const productId = req.params.id;
+      const orders = await Order.find({ product: productId });
+      const totalOrderedQuantity = orders.reduce(
+        (total, order) => total + order.quantity,
+        0
+      );
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ message: "Not Found!" });
+      }
+      const remainingQuantity = product.quantity - totalOrderedQuantity;
+      res.status(200).json({ remainingQuantity });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
 
-  // Tất cả sản phẩm tồn kho
   this.getInventoryProducts = async (req, res) => {
     try {
       const allProducts = await Product.find();
