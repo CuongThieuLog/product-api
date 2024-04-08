@@ -5,8 +5,9 @@
   "main": "gateway/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node gateway/app.js",
-    "dev": "nodemon --exec \"node gateway/app.js\""
+    "start": "concurrently \"npm run start-gateway\" \"npm run start-user-service\"",
+    "start-gateway": "nodemon gateway/app.js",
+    "start-user-service": "nodemon user-service/app.js"
   },
   "keywords": [],
   "author": "",
