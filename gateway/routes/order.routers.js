@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
       };
     }
 
-    const newOrderRes = await axios.get(
+    const newOrderRes = await axios.post(
       `http://localhost:8005/order`,
       orderData,
       {
