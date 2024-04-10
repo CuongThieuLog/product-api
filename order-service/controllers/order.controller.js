@@ -70,7 +70,7 @@ function OrderController() {
       ) {
         query.status = status;
       }
-      const orders = await Order.find(query);
+      const orders = await Order.find(query).populate("products.product");
       res.status(200).json({ orders });
     } catch (error) {
       console.error(error);
