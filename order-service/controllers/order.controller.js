@@ -4,7 +4,7 @@ const Product = require("../../product-service/models/product.model");
 function OrderController() {
   this.getAll = async (req, res) => {
     try {
-      const orders = await Order.find();
+      const orders = await Order.find().populate("products.product");
       res.status(200).json({ data: orders });
     } catch (error) {
       res.status(400).json({ error: error.message });

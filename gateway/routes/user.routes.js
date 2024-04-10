@@ -26,7 +26,7 @@ router.get("/user-me", async (req, res) => {
   }
 });
 
-router.get("/user-all", async (req, res) => {
+router.get("/user", async (req, res) => {
   try {
     const params = req.query;
     let apiUrl = "http://localhost:8002/user";
