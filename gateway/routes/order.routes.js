@@ -68,8 +68,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/my-self", async (req, res) => {
+router.get("/my-self/:id", async (req, res) => {
   try {
+    const userId = req.params.id;
     let headers = {};
 
     if (req.headers.authorization) {
@@ -79,7 +80,7 @@ router.get("/my-self", async (req, res) => {
     }
 
     const orderByUserRes = await axios.get(
-      `http://localhost:8005/order/my-self`,
+      `http://localhost:8005/order/my-self/${userId}`,
       {
         headers,
       }
