@@ -8,7 +8,7 @@ router.get("/", auth, roleAdmin, OrderController.getAll);
 router.get("/:id", auth, OrderController.getById);
 router.post("/", auth, OrderController.create);
 router.post("/:id", auth, OrderController.deleteOrder);
-router.get("/my-self", auth, OrderController.getAllOrderMySelf);
+router.get("/my-self/:id", auth, OrderController.getAllOrderMySelf);
 router.put(
   "/update-status/:id",
   auth,
