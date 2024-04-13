@@ -115,8 +115,9 @@ router.put("/update-status/:id", async (req, res) => {
   }
 });
 
-router.get("/profit", async (req, res) => {
+router.get("/profit/:status", async (req, res) => {
   try {
+    const status = req.params.status;
     let headers = {};
 
     if (req.headers.authorization) {
@@ -125,9 +126,12 @@ router.get("/profit", async (req, res) => {
       };
     }
 
-    const profitRes = await axios.get(`http://localhost:8005/order/profit`, {
-      headers,
-    });
+    const profitRes = await axios.get(
+      `http://localhost:8005/order/profit/${status}`,
+      {
+        headers,
+      }
+    );
 
     res.json(profitRes.data);
   } catch (error) {
@@ -135,8 +139,9 @@ router.get("/profit", async (req, res) => {
   }
 });
 
-router.get("/income", async (req, res) => {
+router.get("/income/:status", async (req, res) => {
   try {
+    const status = req.params.status;
     let headers = {};
 
     if (req.headers.authorization) {
@@ -145,9 +150,12 @@ router.get("/income", async (req, res) => {
       };
     }
 
-    const incomeRes = await axios.get(`http://localhost:8005/order/income`, {
-      headers,
-    });
+    const incomeRes = await axios.get(
+      `http://localhost:8005/order/income/${status}`,
+      {
+        headers,
+      }
+    );
 
     res.json(incomeRes.data);
   } catch (error) {
