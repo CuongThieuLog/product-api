@@ -17,9 +17,14 @@ router.post("/register", async (req, res) => {
 
 router.get("/user-me", async (req, res) => {
   try {
-    const meRes = await axios.get("http://localhost:8002/user-me", {
-      headers: { Authorization: req.headers.authorization },
-    });
+    let headers = {};
+
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+    const meRes = await axios.get("http://localhost:8002/user-me", { headers });
     res.json(meRes.data);
   } catch (error) {
     res.status(500).json(error);
