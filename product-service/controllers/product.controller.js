@@ -74,9 +74,19 @@ function ProductController() {
 
   this.delete = async (req, res) => {
     try {
+      const productInOrders = await Order.find({
+        "products.product": req.params.id,
+      });
+      if (productInOrders.length > 0) {
+        return res.status(400).json({
+          message:
+            "This product is associated with one or more orders and cannot be deleted.",
+        });
+      }
+
       const deletedProduct = await Product.findByIdAndDelete(req.params.id);
       if (!deletedProduct) {
-        return res.status(404).json({ message: "Not Found!" });
+        return res.status(404).json({ message: "Product not found!" });
       }
       res.status(200).json({
         message: "Deleted successfully",
