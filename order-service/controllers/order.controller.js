@@ -11,6 +11,22 @@ function OrderController() {
     }
   };
 
+  this.getById = async (req, res) => {
+    try {
+      const orderId = req.params.id;
+      const order = await Order.findById(orderId).populate("products.product");
+
+      if (!order) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+
+      res.status(200).json({ order });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error" });
+    }
+  };
+
   this.create = async (req, res) => {
     try {
       const { products, shippingAddress } = req.body;

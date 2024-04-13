@@ -22,6 +22,27 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    let headers = {};
+
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+
+    const orderRes = await axios.get(`http://localhost:8005/order/${orderId}`, {
+      headers,
+    });
+
+    res.json(orderRes.data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     let headers = {};
